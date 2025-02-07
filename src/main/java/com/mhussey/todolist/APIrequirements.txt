@@ -1,0 +1,6 @@
+API REQUIREMENTS:
+basic CRUD functions for all 3 tables
+
+get pending tasks
+get overdue tasks/tasks due by a certain date
+get completed tasks
