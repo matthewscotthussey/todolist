@@ -26,7 +26,7 @@ public class TaskController {
         if (completed.isPresent()) {
             return taskRepository.findByCompletedIs(completed.get());
         }
-        else return taskRepository.findAllOrderByPriorityDesc();
+        else return taskRepository.findAllByOrderByPriorityDesc();
 
     }
 

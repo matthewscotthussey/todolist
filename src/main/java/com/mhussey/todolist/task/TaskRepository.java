@@ -14,7 +14,7 @@ public interface TaskRepository extends ListCrudRepository<Task, Long>, PagingAn
 
     public List<Task> findByCompletedIs(boolean completed);
 
-    public List<Task> findAllOrderByPriorityDesc();
+    public List<Task> findAllByOrderByPriorityDesc();
 
     public List<Task> findTaskByDueDtBeforeAndCompletedIsOrderByPriorityDesc(Instant dueDtBefore, boolean completed);
 }
