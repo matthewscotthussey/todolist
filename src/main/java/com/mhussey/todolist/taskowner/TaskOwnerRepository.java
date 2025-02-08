@@ -1,8 +1,13 @@
 package com.mhussey.todolist.taskowner;
 
-import org.springframework.data.repository.CrudRepository;
+import com.mhussey.todolist.task.Task;
+import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface TaskOwnerRepository extends CrudRepository<TaskOwner, Long> {
+public interface TaskOwnerRepository extends ListCrudRepository<TaskOwner, Long> {
+
+    public List<TaskOwner> findByNameIgnoreCase(String name);
 }

@@ -1,18 +1,20 @@
-package com.mhussey.todolist.taskowner;
+package com.mhussey.todolist.taskcategory;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("TASK_OWNER")
+@Table("TASK_CATEGORY")
 public
-class TaskOwner {
+class TaskCategory {
     @Id
     private long id;
 
     private String name;
+    private long priority;
 
-    public TaskOwner(String name) {
+    public TaskCategory(String name, long priority) {
         this.name = name;
+        this.priority = priority;
     }
 
     //get
@@ -23,6 +25,8 @@ class TaskOwner {
     public String getName() {
         return name;
     }
+
+    public long getPriority() {return priority;}
     //set
     public void setName(String name) {
         this.name = name;
@@ -31,4 +35,6 @@ class TaskOwner {
     public void setId(long id) {
         this.id = id;
     }
+
+    public void setPriority(long priority) {this.priority = priority;}
 }

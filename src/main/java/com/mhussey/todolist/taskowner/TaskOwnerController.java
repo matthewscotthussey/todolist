@@ -21,12 +21,12 @@ public class TaskOwnerController {
 
     @GetMapping("/getAllTaskOwners")
     public List<TaskOwner> getAllTaskOwners() {
-        return (List<TaskOwner>) taskOwnerRepository.findAll();
+        return taskOwnerRepository.findAll();
     }
 
     @GetMapping("/getTaskOwnerById/{id}")
     public TaskOwner getTaskOwnerById(@PathVariable long id) {
-        return taskOwnerRepository.findById(id).get();
+        return taskOwnerRepository.findById(id).orElse(null);
     }
 
     @PutMapping("/updateTaskOwner/{id}")
@@ -44,6 +44,8 @@ public class TaskOwnerController {
         }
     }
 
+    //NOTE: ON DELETE CASCADE is set on the FK for ID on the TASK table.
+    // This means deleting a task owner will delete all associated tasks from the TASK table.
     @DeleteMapping("/deleteTaskOwner/{id}")
     public String deleteTaskOwner(@PathVariable Long id) {
         try {
