@@ -35,6 +35,7 @@ public class TaskCategoryController {
         Optional<TaskCategory> tempTaskCategory = taskCategoryRepository.findById(id);
         if (tempTaskCategory.isPresent()) {
             tempTaskCategory.get().setName(updateTaskCategory.getName());
+            tempTaskCategory.get().setPriority(updateTaskCategory.getPriority());
             return taskCategoryRepository.save(tempTaskCategory.get());
         } else{
             return null;

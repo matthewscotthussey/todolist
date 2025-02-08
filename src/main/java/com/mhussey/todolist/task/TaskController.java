@@ -1,5 +1,6 @@
 package com.mhussey.todolist.task;
 
+import com.mhussey.todolist.taskcategory.TaskCategory;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
@@ -45,7 +46,30 @@ public class TaskController {
         //uses the findById method from the CRUD interface to get a Task matching the id, if no match is found we return nothing.
         Optional<Task> tempTask = taskRepository.findById(id);
         if (tempTask.isPresent()) {
+            tempTask.get().setCategoryId(updateTask.getCategoryId());
+            tempTask.get().setOwnerId(updateTask.getOwnerId());
             tempTask.get().setName(updateTask.getName());
+            tempTask.get().setDescription(updateTask.getDescription());
+            tempTask.get().setPriority(updateTask.getPriority());
+            tempTask.get().setCreateDt(updateTask.getCreateDt());
+            tempTask.get().setDueDt(updateTask.getDueDt());
+            tempTask.get().setCompleted(updateTask.isCompleted());
+
+            return taskRepository.save(tempTask.get());
+        } else{
+            return null;
+            //todo: this should probably throw an exception or something.
+            //      I'm not thrilled with returning null but better than a 500 error.
+            //      404 would be great if we were using HTTPResponse
+        }
+    }
+
+    @PutMapping("/completeTask/{id}")
+    public Task completeTask(@PathVariable long id) {
+        //uses the findById method from the CRUD interface to get a TaskCategory matching the id, if no match is found we return nothing.
+        Optional<Task> tempTask = taskRepository.findById(id);
+        if (tempTask.isPresent()) {
+            tempTask.get().setCompleted(true);
             return taskRepository.save(tempTask.get());
         } else{
             return null;
